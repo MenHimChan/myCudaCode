@@ -8,7 +8,7 @@ CXXFLAGS := -arch=sm_86  # 针对RTX 3060的CUDA架构
 INCLUDES := -I./common
 
 # .cu的文件名, 不包含扩展名, 每次编译修改这个变量即可
-FILENAME := 4.8Constant_memory
+FILENAME := 4.10Warp_Shuffle_Instrcution
 
 # 输出文件路径（不包含扩展名）
 TARGETNAME := ./exefile/$(FILENAME)
@@ -18,13 +18,14 @@ SRC := $(FILENAME).cu ./common/common.cpp
 
 # 编译目标
 $(TARGETNAME): $(SRC)
-	$(NVCC) $(CXXFLAGS) $(INCLUDES) -o $(TARGETNAME) $(SRC)  # 关键修复：添加空格
+	$(NVCC) $(CXXFLAGS) $(INCLUDES) -o $(TARGETNAME) $(SRC) 
 
 # 运行目标：编译后自动运行程序
 run: $(TARGETNAME)
 	@echo
-	@echo
 	@echo "Compilation complete. Now Running the program ..."
+	@echo "-----------------------------------------------------------------------------------"
+	@echo
 	./$(TARGETNAME)
 	@echo
 	@echo "-----------------------------------------------------------------------------------"
